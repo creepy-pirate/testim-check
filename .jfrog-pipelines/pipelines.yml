@@ -17,7 +17,7 @@ variables:
 pipelines:
   - name: TestimPipeline
     steps:
-      - type: custom
+      - type: bash
         name: SetupEnvironment
         image: node:latest
         commands:
@@ -26,13 +26,13 @@ pipelines:
           - export NODE_PATH="$NODE_PATH:${JP_WORKSPACE}/.npm-packages/lib/node_modules"
           - npm config set prefix ${JP_WORKSPACE}/.npm-packages
 
-      - type: custom
+      - type: bash
         name: InstallTestimCLI
         image: node:latest
         commands:
           - npm install -g @testim/testim-cli
 
-      - type: custom
+      - type: bash
         name: RunTestimTests
         image: node:latest
         commands:
@@ -46,7 +46,7 @@ pipelines:
           paths:
             - test-results/*.xml
 
-      - type: custom
+      - type: bash
         name: PrintCompletionMessage
         image: node:latest
         commands:
