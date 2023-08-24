@@ -30,5 +30,5 @@ pipelines:
             - export NODE_PATH="$NODE_PATH:$NPM_PACKAGES/lib/node_modules"
             - npm config set prefix "${JP_WORKSPACE}/.npm-packages"
             - npm install -g @testim/testim-cli
-            - testim --token "${TESTIM_TOKEN}" --project "${TESTIM_PROJECT}" --grid "${TESTIM_GRID}" --report-file "test-results/testim-tests-${BUILD_NUMBER}-report.xml"
+            - testim --token "${TESTIM_TOKEN}" --project "${TESTIM_PROJECT}" --grid "${TESTIM_GRID}" --report-file "testim-tests-report.xml"
             - echo "Testim finished"
