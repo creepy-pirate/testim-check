@@ -17,22 +17,13 @@ variables:
 pipelines:
   - name: TestimPipeline
     steps:
-      - name: SetupEnvironment
+      - name: RunTestimTests
         type: Bash
         execution:
           onExecute:
-            - echo "Setting up environment"
-            - mkdir -p "${JP_WORKSPACE}/.npm-packages"
-            - export PATH="$PATH:${JP_WORKSPACE}/.npm-packages/bin"
-            - export NODE_PATH="$NODE_PATH:${JP_WORKSPACE}/.npm-packages/lib/node_modules"
-            - npm config set prefix ${JP_WORKSPACE}/.npm-packages
-            - echo "Installing Testim CLI"
-            - npm install -g @testim/testim-cli
             - echo "Running Testim Tests"
-            - testim \
-                --label "$TEST_LABEL" \
+            - npm i -g @testim/testim-cli && testim \
                 --token "$TESTIM_TOKEN" \
                 --project "$TESTIM_PROJECT" \
-                --grid "$TESTIM_GRID" \
-                --report-file test-results/testim-tests-$BUILD_NUMBER-report.xml
+                --grid "$TESTIM_GRID"
             - echo "Testim finished"
