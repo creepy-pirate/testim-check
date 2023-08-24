@@ -12,7 +12,6 @@ variables:
   TESTIM_TOKEN: "7Gohf81BZYRrIMLoGBhnNF4wuzCS6is194r0R6Y8NEBUPBBPx5"
   TESTIM_PROJECT: "QCmTIpKSP0XtVRAGVTzU"
   TESTIM_GRID: "Testim-Grid"
-  TEST_LABEL: "Login"
 
 pipelines:
   - name: TestimPipeline
@@ -22,8 +21,16 @@ pipelines:
         execution:
           onExecute:
             - echo "Running Testim Tests"
-            - npm i -g @testim/testim-cli && testim \
-                --token "$TESTIM_TOKEN" \
-                --project "$TESTIM_PROJECT" \
-                --grid "$TESTIM_GRID"
+            - mkdir -p "${JP_WORKSPACE}/.npm-packages"
+            - prefix="${JP_WORKSPACE}/.npm-packages"
+            - NPM_PACKAGES="${JP_WORKSPACE}/.npm-packages"
+            - export PATH="$PATH:$NPM_PACKAGES/bin"
+            - export NODE_PATH="$NODE_PATH:$NPM_PACKAGES/lib/node_modules"
+            - npm config set prefix "${JP_WORKSPACE}/.npm-packages"
+            - npm install -g @testim/testim-cli
+            - testim \
+                --token "${TESTIM_TOKEN}" \
+                --project "${TESTIM_PROJECT}" \
+                --grid "${TESTIM_GRID}" \
+                --report-file "test-results/testim-tests-${BUILD_NUMBER}-report.xml"
             - echo "Testim finished"
