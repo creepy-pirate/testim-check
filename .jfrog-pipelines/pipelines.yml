@@ -7,20 +7,22 @@ resources:
       branches:
         include: "{{ gitBranch }}"
 
-variables:
-  JP_WORKSPACE: "/workspace"  # Default workspace in JFrog Pipelines
-  TESTIM_TOKEN: "7Gohf81BZYRrIMLoGBhnNF4wuzCS6is194r0R6Y8NEBUPBBPx5"
-  TESTIM_PROJECT: "QCmTIpKSP0XtVRAGVTzU"
-  TESTIM_GRID: "Testim-Grid"
-
 pipelines:
   - name: TestimPipeline
+    configuration:
+        environmentVariables:
+          readOnly:
+            JP_WORKSPACE: "/workspace"
+            TESTIM_TOKEN: "7Gohf81BZYRrIMLoGBhnNF4wuzCS6is194r0R6Y8NEBUPBBPx5"
+            TESTIM_PROJECT: "QCmTIpKSP0XtVRAGVTzU"
+            TESTIM_GRID: "Testim-Grid"
     steps:
       - name: RunTestimTests
         type: Bash
         execution:
           onExecute:
             - echo "Running Testim Tests"
+            - echo $JP_WORKSPACE
             - mkdir -p "${JP_WORKSPACE}/.npm-packages"
             - prefix="${JP_WORKSPACE}/.npm-packages"
             - NPM_PACKAGES="${JP_WORKSPACE}/.npm-packages"
