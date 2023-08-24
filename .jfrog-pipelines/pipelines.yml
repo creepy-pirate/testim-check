@@ -8,22 +8,22 @@ resources:
         include: "{{ gitBranch }}"
 
 variables:
-  WORKSPACE: "/path/to/workspace"  # Update with the actual workspace path
-  BUILD_NUMBER: "123"  # Update with the actual build number
-  TESTIM_TOKEN: "your-testim-token"
-  TESTIM_PROJECT: "your-testim-project"
+  JP_WORKSPACE: "/workspace"  # Default workspace in JFrog Pipelines
+  TESTIM_TOKEN: "7Gohf81BZYRrIMLoGBhnNF4wuzCS6is194r0R6Y8NEBUPBBPx5"
+  TESTIM_PROJECT: "QCmTIpKSP0XtVRAGVTzU"
   TESTIM_GRID: "Testim-Grid"
+  TEST_LABEL: "Login"
 
 pipelines:
   - name: Testim Pipeline
     steps:
       - name: Setup Environment
-        image: node:latest  # Use a suitable Node.js image
+        image: node:latest
         commands:
-          - mkdir -p "${WORKSPACE}/.npm-packages"
-          - export PATH="$PATH:${WORKSPACE}/.npm-packages/bin"
-          - export NODE_PATH="$NODE_PATH:${WORKSPACE}/.npm-packages/lib/node_modules"
-          - npm config set prefix ${WORKSPACE}/.npm-packages
+          - mkdir -p "${JP_WORKSPACE}/.npm-packages"
+          - export PATH="$PATH:${JP_WORKSPACE}/.npm-packages/bin"
+          - export NODE_PATH="$NODE_PATH:${JP_WORKSPACE}/.npm-packages/lib/node_modules"
+          - npm config set prefix ${JP_WORKSPACE}/.npm-packages
 
       - name: Install Testim CLI
         image: node:latest
@@ -34,16 +34,16 @@ pipelines:
         image: node:latest
         commands:
           - testim \
+              --label "$TEST_LABEL" \
               --token "$TESTIM_TOKEN" \
               --project "$TESTIM_PROJECT" \
               --grid "$TESTIM_GRID" \
               --report-file test-results/testim-tests-$BUILD_NUMBER-report.xml
+        artifacts:
+          paths:
+            - test-results/*.xml
 
       - name: Print Completion Message
         image: node:latest
         commands:
           - echo "Testim finished"
-
-    artifacts:
-      paths:
-        - test-results/*.xml
