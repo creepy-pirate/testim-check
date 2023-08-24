@@ -1,0 +1,47 @@
+resources:
+  - name: test
+    type: GitRepo
+    configuration:
+      gitProvider: deepak_git
+      path: creepy-pirate/testim-check
+      branches:
+        include: "{{ gitBranch }}"
+
+
+variables:
+  WORKSPACE: "/path/to/workspace"  # Update with the actual workspace path
+  BUILD_NUMBER: "123"  # Update with the actual build number
+  TESTIM_TOKEN: "your-testim-token"
+  TESTIM_PROJECT: "your-testim-project"
+  TESTIM_GRID: "Testim-Grid"
+artifacts:
+  paths:
+    - test-results/*.xml
+
+pipelines:
+  - name: Setup Environment
+    image: node:latest  # Use a suitable Node.js image
+    commands:
+      - mkdir -p "${WORKSPACE}/.npm-packages"
+      - export PATH="$PATH:${WORKSPACE}/.npm-packages/bin"
+      - export NODE_PATH="$NODE_PATH:${WORKSPACE}/.npm-packages/lib/node_modules"
+      - npm config set prefix ${WORKSPACE}/.npm-packages
+
+  - name: Install Testim CLI
+    image: node:latest
+    commands:
+      - npm install -g @testim/testim-cli
+
+  - name: Run Testim Tests
+    image: node:latest
+    commands:
+      - testim \
+          --token "$TESTIM_TOKEN" \
+          --project "$TESTIM_PROJECT" \
+          --grid "$TESTIM_GRID" \
+          --report-file test-results/testim-tests-$BUILD_NUMBER-report.xml
+
+  - name: Print Completion Message
+    image: node:latest
+    commands:
+      - echo "Testim finished"
