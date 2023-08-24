@@ -17,37 +17,37 @@ variables:
 pipelines:
   - name: TestimPipeline
     steps:
-      - type: bash
-        name: SetupEnvironment
-        image: node:latest
-        commands:
-          - mkdir -p "${JP_WORKSPACE}/.npm-packages"
-          - export PATH="$PATH:${JP_WORKSPACE}/.npm-packages/bin"
-          - export NODE_PATH="$NODE_PATH:${JP_WORKSPACE}/.npm-packages/lib/node_modules"
-          - npm config set prefix ${JP_WORKSPACE}/.npm-packages
+      - name: SetupEnvironment
+        type: Bash
+        execution:
+          onExecute:
+            - echo "Setting up environment"
+            - mkdir -p "${JP_WORKSPACE}/.npm-packages"
+            - export PATH="$PATH:${JP_WORKSPACE}/.npm-packages/bin"
+            - export NODE_PATH="$NODE_PATH:${JP_WORKSPACE}/.npm-packages/lib/node_modules"
+            - npm config set prefix ${JP_WORKSPACE}/.npm-packages
 
-      - type: bash
-        name: InstallTestimCLI
-        image: node:latest
-        commands:
-          - npm install -g @testim/testim-cli
+      - name: InstallTestimCLI
+        type: Bash
+        execution:
+          onExecute:
+            - echo "Installing Testim CLI"
+            - npm install -g @testim/testim-cli
 
-      - type: bash
-        name: RunTestimTests
-        image: node:latest
-        commands:
-          - testim \
-              --label "$TEST_LABEL" \
-              --token "$TESTIM_TOKEN" \
-              --project "$TESTIM_PROJECT" \
-              --grid "$TESTIM_GRID" \
-              --report-file test-results/testim-tests-$BUILD_NUMBER-report.xml
-        artifacts:
-          paths:
-            - test-results/*.xml
+      - name: RunTestimTests
+        type: Bash
+        execution:
+          onExecute:
+            - echo "Running Testim Tests"
+            - testim \
+                --label "$TEST_LABEL" \
+                --token "$TESTIM_TOKEN" \
+                --project "$TESTIM_PROJECT" \
+                --grid "$TESTIM_GRID" \
+                --report-file test-results/testim-tests-$BUILD_NUMBER-report.xml
 
-      - type: bash
-        name: PrintCompletionMessage
-        image: node:latest
-        commands:
-          - echo "Testim finished"
+      - name: PrintCompletionMessage
+        type: Bash
+        execution:
+          onExecute:
+            - echo "Testim finished"
