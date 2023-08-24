@@ -19,6 +19,7 @@ pipelines:
     steps:
       - name: SetupEnvironment
         type: Bash
+        dependsOn: InstallTestimCLI
         execution:
           onExecute:
             - echo "Setting up environment"
@@ -36,6 +37,7 @@ pipelines:
 
       - name: RunTestimTests
         type: Bash
+        dependsOn: SetupEnvironment
         execution:
           onExecute:
             - echo "Running Testim Tests"
@@ -48,6 +50,7 @@ pipelines:
 
       - name: PrintCompletionMessage
         type: Bash
+        dependsOn: RunTestimTests
         execution:
           onExecute:
             - echo "Testim finished"
