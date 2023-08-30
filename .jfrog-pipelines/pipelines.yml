@@ -17,7 +17,7 @@ pipelines:
             TESTIM_PROJECT: "QCmTIpKSP0XtVRAGVTzU"
             TESTIM_GRID: "Testim-Grid"
             env2:
-              default: pipe_value2
+              default: 'hello'
               description: This is env2 description
               values:
                 - 'hello'
