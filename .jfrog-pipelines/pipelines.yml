@@ -30,7 +30,7 @@ pipelines:
               default: 'sanity'
               description: Run all tests comprising one of the mentioned labels
               allowCustom: true
-              values:
+              value:
                 - 'sanity'
             TESTIM_BASE_URL:
               default: 'https://jfrog.info'
