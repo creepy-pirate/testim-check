@@ -58,24 +58,24 @@ pipelines:
                 - 4444
             TESTIM_BRANCH:
               default: 'master'
-                description: Where to run the tests
-                allowCustom: true
-                value:
-                  - 'master'
+              description: Where to run the tests
+              allowCustom: true
+              value:
+                - 'master'
             TESTIM_SELENIUM_MODE:
               default: false
-                description: "When you run IE11, Edge, or Safari, you'll need to add this parameter before you can run"
-                allowCustom: false
-                values:
-                  - true
-                  - false
+              description: "When you run IE11, Edge, or Safari, you'll need to add this parameter before you can run"
+              allowCustom: false
+              values:
+                - true
+                - false
             DEBUG_MODE:
               default: false
-                description: "Check here for echoing tests command"
-                allowCustom: false
-                values:
-                  - true
-                  - false
+              description: "Check here for echoing tests command"
+              allowCustom: false
+              values:
+                - true
+                - false
             JP_WORKSPACE: "/workspace"
             TESTIM_TOKEN: "7Gohf81BZYRrIMLoGBhnNF4wuzCS6is194r0R6Y8NEBUPBBPx5"
             TESTIM_PROJECT: "QCmTIpKSP0XtVRAGVTzU"
