@@ -10,6 +10,8 @@ resources:
 pipelines:
   - name: TestimPipeline
     configuration:
+      integrations:
+            - name: notifySMTP
         environmentVariables:
           readOnly:
             BROWSER_NAME:
