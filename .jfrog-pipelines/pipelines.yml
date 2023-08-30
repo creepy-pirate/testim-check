@@ -81,6 +81,7 @@ pipelines:
             TESTIM_PROJECT: "QCmTIpKSP0XtVRAGVTzU"
             TESTIM_GRID: "Testim-Grid"
             TESTIM_DOCKER: "testim/docker-cli"
+            EXEC_CMD: 'docker run --rm -v ${WORKSPACE}:/opt/testim-runner ${TESTIM_DOCKER}'
           
     steps:
       - name: RunTestimTests
@@ -91,5 +92,6 @@ pipelines:
             - echo "Pulling latest version"
             - docker pull ${TESTIM_DOCKER}
             - echo "Run testim-cli"
-            - docker run --rm -v ${WORKSPACE}:/opt/testim-runner ${TESTIM_DOCKER} --token "${TESTIM_TOKEN}" --project "${TESTIM_PROJECT}" --grid "${TESTIM_GRID}" -r "report.xml"
+            - [ "${TESTIM_PROJECT_NAME}" != "website" ] && EXEC_CMD+="--project '${TESTIM_PROJECT}' --token '${TESTIM_TOKEN}' --grid '${TESTIM_GRID}'"
+            - sh "${EXEC_CMD}"
             - echo "Testim finished"
