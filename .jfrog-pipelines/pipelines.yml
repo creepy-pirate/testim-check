@@ -80,6 +80,7 @@ pipelines:
             TESTIM_TOKEN: "7Gohf81BZYRrIMLoGBhnNF4wuzCS6is194r0R6Y8NEBUPBBPx5"
             TESTIM_PROJECT: "QCmTIpKSP0XtVRAGVTzU"
             TESTIM_GRID: "Testim-Grid"
+            TESTIM_DOCKER: "testim/docker-cli"
           
     steps:
       - name: RunTestimTests
@@ -87,13 +88,14 @@ pipelines:
         execution:
           onExecute:
             - echo "Running Testim Tests"
-            - echo $JP_WORKSPACE
-            - mkdir -p "${JP_WORKSPACE}/.npm-packages"
-            - prefix="${JP_WORKSPACE}/.npm-packages"
-            - NPM_PACKAGES="${JP_WORKSPACE}/.npm-packages"
-            - export PATH="$PATH:$NPM_PACKAGES/bin"
-            - export NODE_PATH="$NODE_PATH:$NPM_PACKAGES/lib/node_modules"
-            - npm config set prefix "${JP_WORKSPACE}/.npm-packages"
-            - npm install -g @testim/testim-cli
-            - testim --token "${TESTIM_TOKEN}" --project "${TESTIM_PROJECT}" --grid "${TESTIM_GRID}" --report-file "testim-tests-report.xml"
+            - echo "Pulling latest version"
+            - docker pull ${TESTIM_DOCKER}
+            - echo "Run testim-cli"
+            docker run --rm \
+              -v ${WORKSPACE}:/opt/testim-runner \
+              ${TESTIM_DOCKER} \
+              --token "7Gohf81BZYRrIMLoGBhnNF4wuzCS6is194r0R6Y8NEBUPBBPx5" \
+              --project "QCmTIpKSP0XtVRAGVTzU" \
+              --grid "Testim-Grid" \
+              -r "/opt/testim-runner/testim-sanity-$BUILD_NUMBER-report.xml"
             - echo "Testim finished"
