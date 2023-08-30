@@ -67,15 +67,15 @@ pipelines:
               description: "When you run IE11, Edge, or Safari, you'll need to add this parameter before you can run"
               allowCustom: false
               values:
-                - true
-                - false
+                - 'true'
+                - 'false'
             DEBUG_MODE:
               default: false
               description: "Check here for echoing tests command"
               allowCustom: false
               values:
-                - true
-                - false
+                - 'true'
+                - 'false'
             JP_WORKSPACE: "/workspace"
             TESTIM_TOKEN: "7Gohf81BZYRrIMLoGBhnNF4wuzCS6is194r0R6Y8NEBUPBBPx5"
             TESTIM_PROJECT: "QCmTIpKSP0XtVRAGVTzU"
