@@ -12,6 +12,32 @@ pipelines:
     configuration:
         environmentVariables:
           readOnly:
+            BROWSER_NAME:
+              default: 'chrome-99-mac'
+              description: Choose browser for running tests
+              values:
+                - 'chrome-99-mac'
+                - 'chrome-99-mac-prod'
+                - 'ie-11-win'
+                - 'edge-18-win'
+                - 'safari-13-mac'
+            TESTIM_PROJECT_NAME:
+              default: 'website'
+              description: Select the project to run tests from
+              values:
+                - 'website'
+            TESTIM_LABEL:
+              default: 'sanity'
+              description: Run all tests comprising one of the mentioned labels
+              allowCustom: true
+              values:
+                - 'sanity'
+            TESTIM_BASE_URL:
+              default: 'https://jfrog.info'
+              description: Starting URL after browser opens
+              allowCustom: true
+              values:
+                - 'https://jfrog.info'  
             JP_WORKSPACE: "/workspace"
             TESTIM_TOKEN: "7Gohf81BZYRrIMLoGBhnNF4wuzCS6is194r0R6Y8NEBUPBBPx5"
             TESTIM_PROJECT: "QCmTIpKSP0XtVRAGVTzU"
