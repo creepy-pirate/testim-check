@@ -100,3 +100,7 @@ pipelines:
               fi
             - sh "${EXEC_CMD}"
             - echo "Testim finished"
+          onSuccess:
+            - send_notification notifySMTP --recipients "dv72276@gmail.com" --subject "Build Succeeded" --body " Tests ran successfully"
+          onFailure:
+            - send_notification notifySMTP --recipients "dv72276@gmail.com" --subject "Build Failed" --body "Tests failed"
