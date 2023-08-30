@@ -63,14 +63,14 @@ pipelines:
               value:
                 - 'master'
             TESTIM_SELENIUM_MODE:
-              default: false
+              default: 'false'
               description: "When you run IE11, Edge, or Safari, you'll need to add this parameter before you can run"
               allowCustom: false
               values:
                 - 'true'
                 - 'false'
             DEBUG_MODE:
-              default: false
+              default: 'false'
               description: "Check here for echoing tests command"
               allowCustom: false
               values:
