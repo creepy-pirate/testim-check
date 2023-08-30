@@ -36,19 +36,51 @@ pipelines:
               default: 'https://jfrog.info'
               description: Starting URL after browser opens
               allowCustom: true
-              values:
-                - 'https://jfrog.info'  
+              value:
+                - 'https://jfrog.info'
+            TESTIM_PARALLEL:
+              default: 4
+              description: How many tests should run in parallel
+              allowCustom: true
+              value:
+                - 4
+            TESTIM_GRID_HOST:
+              default: 'hub-cloud.browserstack.com/wd/hub'
+              description: Where to run the tests
+              allowCustom: true
+              value:
+                - 'hub-cloud.browserstack.com/wd/hub'
+            TESTIM_GRID_PORT:
+              default: 4444
+              description: Where to run the tests
+              allowCustom: true
+              value:
+                - 4444
+            TESTIM_BRANCH:
+              default: 'master'
+                description: Where to run the tests
+                allowCustom: true
+                value:
+                  - 'master'
+            TESTIM_SELENIUM_MODE:
+              default: false
+                description: "When you run IE11, Edge, or Safari, you'll need to add this parameter before you can run"
+                allowCustom: false
+                values:
+                  - true
+                  - false
+            DEBUG_MODE:
+              default: false
+                description: "Check here for echoing tests command"
+                allowCustom: false
+                values:
+                  - true
+                  - false
             JP_WORKSPACE: "/workspace"
             TESTIM_TOKEN: "7Gohf81BZYRrIMLoGBhnNF4wuzCS6is194r0R6Y8NEBUPBBPx5"
             TESTIM_PROJECT: "QCmTIpKSP0XtVRAGVTzU"
             TESTIM_GRID: "Testim-Grid"
-            env2:
-              default: 'hello'
-              description: This is env2 description
-              values:
-                - 'hello'
-                - 'hey'
-                - 'no'
+          
     steps:
       - name: RunTestimTests
         type: Bash
