@@ -10,8 +10,6 @@ resources:
 pipelines:
   - name: TestimPipeline
     configuration:
-      integrations:
-            - name: notifySMTP
         environmentVariables:
           readOnly:
             BROWSER_NAME:
@@ -84,6 +82,8 @@ pipelines:
             TESTIM_GRID: "Testim-Grid"
             TESTIM_DOCKER: "testim/docker-cli"
             EXEC_CMD: 'docker run --rm -v ${WORKSPACE}:/opt/testim-runner ${TESTIM_DOCKER}'
+        integrations:
+            - name: notifySMTP
           
     steps:
       - name: RunTestimTests
