@@ -16,6 +16,13 @@ pipelines:
             TESTIM_TOKEN: "7Gohf81BZYRrIMLoGBhnNF4wuzCS6is194r0R6Y8NEBUPBBPx5"
             TESTIM_PROJECT: "QCmTIpKSP0XtVRAGVTzU"
             TESTIM_GRID: "Testim-Grid"
+            env2:
+              default: pipe_value2
+              description: This is env2 description
+              values:
+                - 'hello'
+                - 'hey'
+                - 'no'
     steps:
       - name: RunTestimTests
         type: Bash
