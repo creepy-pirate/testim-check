@@ -91,5 +91,5 @@ pipelines:
             - echo "Pulling latest version"
             - docker pull ${TESTIM_DOCKER}
             - echo "Run testim-cli"
-            - docker run --rm -v ${WORKSPACE}:/opt/testim-runner ${TESTIM_DOCKER} --token "7Gohf81BZYRrIMLoGBhnNF4wuzCS6is194r0R6Y8NEBUPBBPx5" --project "QCmTIpKSP0XtVRAGVTzU" --grid "Testim-Grid" -r "report.xml"
+            - docker run --rm -v ${WORKSPACE}:/opt/testim-runner ${TESTIM_DOCKER} --token "${TESTIM_TOKEN}" --project "${TESTIM_PROJECT}" --grid "${TESTIM_GRID}" -r "report.xml"
             - echo "Testim finished"
