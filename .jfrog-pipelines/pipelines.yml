@@ -74,7 +74,7 @@ pipelines:
             TESTIM_PROJECT: "QCmTIpKSP0XtVRAGVTzU"
             TESTIM_GRID: "Testim-Grid"
             TESTIM_DOCKER: "testim/docker-cli"
-            EXEC_CMD: 'docker run --rm -v ${WORKSPACE}:/opt/testim-runner ${TESTIM_DOCKER}'
+          EXEC_CMD: 'docker run --rm -v ${WORKSPACE}:/opt/testim-runner ${TESTIM_DOCKER}'
         integrations:
             - name: slackIntegration
           
