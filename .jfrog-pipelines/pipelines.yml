@@ -89,7 +89,7 @@ pipelines:
             - docker pull ${TESTIM_DOCKER}
             - echo "Run testim-cli"
             - >-
-              if [ "${TESTIM_PROJECT_NAME}" != "website" ]; then
+              if [ "${TESTIM_PROJECT_NAME}" = "website" ]; then
                 EXEC_CMD+=" --project ${TESTIM_PROJECT} --token ${TESTIM_TOKEN} --grid ${TESTIM_GRID}"
               fi
             - echo "${EXEC_CMD}"
