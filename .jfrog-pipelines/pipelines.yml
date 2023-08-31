@@ -92,8 +92,7 @@ pipelines:
               if [ "${TESTIM_PROJECT_NAME}" = "website" ]; then
                 EXEC_CMD="${EXEC_CMD} --token ${TESTIM_TOKEN} --project ${TESTIM_PROJECT} --grid ${TESTIM_GRID} -r report.xml"
               fi
-            - docker run --rm -v ${WORKSPACE}:/opt/testim-runner ${TESTIM_DOCKER} --token ${TESTIM_TOKEN} --project ${TESTIM_PROJECT} --grid ${TESTIM_GRID} -r report.xml
-            - sh "${EXEC_CMD}"
+            - bash -c "${EXEC_CMD}"
             - echo "Testim finished"
           onSuccess:
             - send_notification slackIntegration --text "Success testim-test-pipeline"
