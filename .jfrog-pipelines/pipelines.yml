@@ -69,13 +69,6 @@ pipelines:
               values:
                 - 'true'
                 - 'false'
-            "DEBUG_MODE":
-              default: 'false'
-              description: "Check here for echoing tests command"
-              allowCustom: false
-              values:
-                - 'true'
-                - 'false'
             JP_WORKSPACE: "/workspace"
             TESTIM_TOKEN: "7Gohf81BZYRrIMLoGBhnNF4wuzCS6is194r0R6Y8NEBUPBBPx5"
             TESTIM_PROJECT: "QCmTIpKSP0XtVRAGVTzU"
