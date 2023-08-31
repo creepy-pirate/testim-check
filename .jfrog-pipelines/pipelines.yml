@@ -92,7 +92,7 @@ pipelines:
               if [ "${TESTIM_PROJECT_NAME}" = "website" ]; then
                 EXEC_CMD+=" --project ${TESTIM_PROJECT} --token ${TESTIM_TOKEN} --grid ${TESTIM_GRID}"
               fi
-            - echo "${EXEC_CMD}"
+            - sh "${EXEC_CMD}"
             - echo "Testim finished"
           onSuccess:
             - send_notification slackIntegration --text "Success testim-test-pipeline"
