@@ -12,7 +12,7 @@ pipelines:
     configuration:
         environmentVariables:
           readOnly:
-            BROWSER_NAME:
+            "BROWSER_NAME":
               default: 'chrome-99-mac'
               description: Choose browser for running tests
               values:
@@ -21,55 +21,55 @@ pipelines:
                 - 'ie-11-win'
                 - 'edge-18-win'
                 - 'safari-13-mac'
-            TESTIM_PROJECT_NAME:
+            "TESTIM_PROJECT_NAME":
               default: 'website'
               description: Select the project to run tests from
               values:
                 - 'website'
-            TESTIM_LABEL:
+            "TESTIM_LABEL":
               default: 'sanity'
               description: Run all tests comprising one of the mentioned labels
               allowCustom: true
               value:
                 - 'sanity'
-            TESTIM_BASE_URL:
+            "TESTIM_BASE_URL":
               default: 'https://jfrog.info'
               description: Starting URL after browser opens
               allowCustom: true
               value:
                 - 'https://jfrog.info'
-            TESTIM_PARALLEL:
-              default: 4
+            "TESTIM_PARALLEL":
+              default: "4"
               description: How many tests should run in parallel
               allowCustom: true
               value:
-                - 4
-            TESTIM_GRID_HOST:
+                - "4"
+            "TESTIM_GRID_HOST":
               default: 'hub-cloud.browserstack.com/wd/hub'
               description: Where to run the tests
               allowCustom: true
               value:
                 - 'hub-cloud.browserstack.com/wd/hub'
-            TESTIM_GRID_PORT:
-              default: 4444
+            "TESTIM_GRID_PORT":
+              default: "4444"
               description: Where to run the tests
               allowCustom: true
               value:
-                - 4444
-            TESTIM_BRANCH:
+                - "4444"
+            "TESTIM_BRANCH":
               default: 'master'
               description: Where to run the tests
               allowCustom: true
               value:
                 - 'master'
-            TESTIM_SELENIUM_MODE:
+            "TESTIM_SELENIUM_MODE":
               default: 'false'
-              description: "When you run IE11, Edge, or Safari, you'll need to add this parameter before you can run"
+              description: When you run IE11, Edge, or Safari
               allowCustom: false
               values:
                 - 'true'
                 - 'false'
-            DEBUG_MODE:
+            "DEBUG_MODE":
               default: 'false'
               description: "Check here for echoing tests command"
               allowCustom: false
