@@ -100,7 +100,7 @@ pipelines:
               fi
             - sh "${EXEC_CMD}"
             - echo "Testim finished"
-          onSuccess:
-            - send_notification slackIntegration --text "Success testim-test-pipeline"
-          onFailure:
-            - send_notification slackIntegration --text "Failure for testim-test-pipeline"
+          # onSuccess:
+          #   - send_notification slackIntegration --text "Success testim-test-pipeline"
+          # onFailure:
+          #   - send_notification slackIntegration --text "Failure for testim-test-pipeline"
