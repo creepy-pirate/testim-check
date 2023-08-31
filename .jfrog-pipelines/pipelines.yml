@@ -83,7 +83,7 @@ pipelines:
             TESTIM_DOCKER: "testim/docker-cli"
             EXEC_CMD: 'docker run --rm -v ${WORKSPACE}:/opt/testim-runner ${TESTIM_DOCKER}'
         integrations:
-            - name: notifySMTP
+            - name: slackIntegration
           
     steps:
       - name: RunTestimTests
@@ -101,6 +101,6 @@ pipelines:
             - sh "${EXEC_CMD}"
             - echo "Testim finished"
           onSuccess:
-            - send_notification notifySMTP --recipients "dv72276@gmail.com" --subject "Build Succeeded" --body " Tests ran successfully"
+            - send_notification slackIntegration --text "Success testim-test-pipeline"
           onFailure:
-            - send_notification notifySMTP --recipients "dv72276@gmail.com" --subject "Build Failed" --body "Tests failed"
+            - send_notification slackIntegration --text "Failure for testim-test-pipeline"
