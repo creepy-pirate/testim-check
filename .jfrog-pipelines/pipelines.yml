@@ -12,7 +12,6 @@ pipelines:
     configuration:
         environmentVariables:
           readOnly:
-            "hello": "darknessmyoldfriend"
             "BROWSER_NAME":
               default: 'chrome-99-mac'
               description: Choose browser for running tests
